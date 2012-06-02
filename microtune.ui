@@ -79,7 +79,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="e18">
+      <widget class="QLineEdit" name="e8">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -120,7 +120,7 @@
       </widget>
      </item>
      <item row="0" column="3">
-      <widget class="QLineEdit" name="e19">
+      <widget class="QLineEdit" name="e9">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -155,14 +155,14 @@
       </widget>
      </item>
      <item row="1" column="3">
-      <widget class="QLineEdit" name="e16">
+      <widget class="QLineEdit" name="e6">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
      <item row="2" column="3">
-      <widget class="QLineEdit" name="e20">
+      <widget class="QLineEdit" name="e10">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -197,21 +197,21 @@
       </widget>
      </item>
      <item row="4" column="3">
-      <widget class="QLineEdit" name="e28">
+      <widget class="QLineEdit" name="e21">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
      <item row="5" column="5">
-      <widget class="QLineEdit" name="e31">
+      <widget class="QLineEdit" name="e24">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
      <item row="6" column="7">
-      <widget class="QLineEdit" name="e34">
+      <widget class="QLineEdit" name="e18">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -302,7 +302,7 @@
       </widget>
      </item>
      <item row="1" column="7">
-      <widget class="QLineEdit" name="e24">
+      <widget class="QLineEdit" name="e14">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -337,7 +337,7 @@
       </widget>
      </item>
      <item row="0" column="7">
-      <widget class="QLineEdit" name="e22">
+      <widget class="QLineEdit" name="e12">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -379,7 +379,7 @@
       </widget>
      </item>
      <item row="0" column="9">
-      <widget class="QLineEdit" name="e25">
+      <widget class="QLineEdit" name="e15">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -442,14 +442,14 @@
       </widget>
      </item>
      <item row="1" column="9">
-      <widget class="QLineEdit" name="e23">
+      <widget class="QLineEdit" name="e13">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="e17">
+      <widget class="QLineEdit" name="e7">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -518,7 +518,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="e21">
+      <widget class="QLineEdit" name="e11">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -531,7 +531,7 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLineEdit" name="e27">
+      <widget class="QLineEdit" name="e20">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -594,7 +594,7 @@
       </widget>
      </item>
      <item row="4" column="5">
-      <widget class="QLineEdit" name="e26">
+      <widget class="QLineEdit" name="e19">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -607,7 +607,7 @@
       </widget>
      </item>
      <item row="5" column="3">
-      <widget class="QLineEdit" name="e30">
+      <widget class="QLineEdit" name="e23">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -642,7 +642,7 @@
       </widget>
      </item>
      <item row="5" column="7">
-      <widget class="QLineEdit" name="e29">
+      <widget class="QLineEdit" name="e22">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -705,14 +705,14 @@
       </widget>
      </item>
      <item row="6" column="5">
-      <widget class="QLineEdit" name="e33">
+      <widget class="QLineEdit" name="e17">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
      <item row="6" column="9">
-      <widget class="QLineEdit" name="e32">
+      <widget class="QLineEdit" name="e16">
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -933,25 +933,25 @@
  </widget>
  <tabstops>
   <tabstop>comboPresets</tabstop>
-  <tabstop>e18</tabstop>
-  <tabstop>e19</tabstop>
-  <tabstop>e22</tabstop>
-  <tabstop>e25</tabstop>
-  <tabstop>e21</tabstop>
-  <tabstop>e16</tabstop>
-  <tabstop>e24</tabstop>
-  <tabstop>e23</tabstop>
+  <tabstop>e8</tabstop>
+  <tabstop>e9</tabstop>
+  <tabstop>e12</tabstop>
+  <tabstop>e15</tabstop>
+  <tabstop>e11</tabstop>
+  <tabstop>e6</tabstop>
+  <tabstop>e14</tabstop>
+  <tabstop>e13</tabstop>
+  <tabstop>e7</tabstop>
+  <tabstop>e10</tabstop>
   <tabstop>e17</tabstop>
+  <tabstop>e18</tabstop>
+  <tabstop>e16</tabstop>
   <tabstop>e20</tabstop>
-  <tabstop>e27</tabstop>
-  <tabstop>e28</tabstop>
-  <tabstop>e26</tabstop>
-  <tabstop>e30</tabstop>
-  <tabstop>e31</tabstop>
-  <tabstop>e29</tabstop>
-  <tabstop>e33</tabstop>
-  <tabstop>e34</tabstop>
-  <tabstop>e32</tabstop>
+  <tabstop>e21</tabstop>
+  <tabstop>e19</tabstop>
+  <tabstop>e23</tabstop>
+  <tabstop>e24</tabstop>
+  <tabstop>e22</tabstop>
   <tabstop>pushUpdate</tabstop>
   <tabstop>pushRename</tabstop>
   <tabstop>pushAdd</tabstop>

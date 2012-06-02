@@ -5,7 +5,7 @@
 //  " M I C R O T U N E " plugin
 //
 //	Manages and applies micro-tonal tunings.
-//	Version 0.1 - Date 19.03.2010
+//	Version 0.2 - Date 21.02.2011
 //
 //	By Maurizio M. Gavioli, 2010.
 //
@@ -29,11 +29,11 @@
 // The g_presets array contains the data for each preset.
 //	Each item of this array is itself an array with 36 items:
 //		items [0] to [34] correspond to the 35 accidentals of MuseScore
-//			(accidents 0 - 15 are not currently used for micro-intervals, but reserved)
+//			(accidents 0 - 6 are not currently used for micro-intervals, but reserved)
 //		item ["Name"] is a human-readable name of the preset.
 var	g_presets = [];
 var	g_numOfPresets	= 0;
-var	g_defaultPreset = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -50, 0, -150, -50, 0, -150, 50, 0, 0, 150, -50, -150, 0, 50, -50, 0, 150, 50, 0];
+var	g_defaultPreset = [0, 0, 0, 0, 0, 0, -50, 0, -150, -50, 0, -150, 50, 0, 0, 150, -50, -150, 0, 50, -50, 0, 150, 50, 0];
 var	g_szDefaultPresetName	= "default";
 
 var	g_form;
@@ -68,12 +68,6 @@ function init()
 
 function run()
 {	var		cursor, dir, file, loader;
-
-	// determine version
-	if( !(this.mscoreVersion != undefined && this.mscoreVersion >= 906) )
-	{	QMessageBox.critical(null, "Unsupported version", "This version of MuseScore is not suppored.\nPlease upgrade to a more recent version.");
-		return;
-	}
 
 	// create the UI
 	loader	= new QUiLoader(null);
@@ -128,7 +122,7 @@ function applyValues()
 				{	for (chordnote = 0; chordnote < cursor.chord().notes; chordnote++)
 					{	note	= cursor.chord().note(chordnote);
 						idx		= note.userAccidental;
-						if(idx >= 16 && idx <= 35)
+						if(idx >= 6 && idx <= 25)
 							note.tuning = preset[idx];
 					}
 				}
@@ -158,7 +152,7 @@ function updatePreset()
 
 	//get selected preset and pick the right item in g_presets array
 	preset = g_presets[g_form.comboPresets.currentIndex];
-	for(step=16; step < 35; step++)
+	for(step=6; step < 25; step++)
 		preset[step] = parseInt( g_form["e"+step].text );
 	g_bDirty = true;
 }
@@ -200,9 +194,9 @@ function addPreset()
 	var		preset = [];
 
 	// init the new preset to the values currently in the dlg
-	for(idx=0; idx < 16; idx++)
+	for(idx=0; idx < 6; idx++)
 		preset[idx] = 0;
-	for(idx=16; idx < 35; idx++)
+	for(idx=6; idx < 25; idx++)
 		preset[idx] = parseInt(g_form["e"+idx].text);
 
 	// aks the user for a name of the new preset
@@ -296,7 +290,7 @@ function setValuesFromPreset(nIdx)
 	preset = g_presets[nIdx];
 
 	// set each value of the preset
-	for(step = 16; step < 35; step++)
+	for(step = 6; step < 25; step++)
 		g_form["e"+step].setText("" + preset[step]);
 	g_bDirty = true;
 }
@@ -313,7 +307,7 @@ function presetExists(preset)
 	bExists = false;
 	for(nIdx=0; nIdx < g_numOfPresets; nIdx++)
 	{	bSame = true;
-		for(nStep=0; nStep < 35; nStep++)
+		for(nStep=0; nStep < 25; nStep++)
 		{	if(preset[nStep] != g_presets[nIdx][nStep])
 			{	bSame = false;			// at least this item is different
 				break;
@@ -384,7 +378,7 @@ function loadIni(fName, bPrefs)
 		if(g_numOfPresets < 1)
 		{	g_numOfPresets = 0;
 			preset = [];
-			for(step = 0; step < 35; step++)
+			for(step = 0; step < 25; step++)
 				preset[step] = g_defaultPreset[step];
 			preset["Name"] = g_szDefaultPresetName;
 			g_presets[0] = preset;			// add to internal data
