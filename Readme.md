@@ -1,8 +1,9 @@
           M I C R O T U N E
 
         A plugin for MuseScore
-       version 0.2 - 21.02.2011
+       version 0.3 - 02.06.2012
 
+---
 
 'Microtune' is a MuseScore plugin to apply micro-interval tuning to a score;
 it also allows to manage ready-made sets of tuning values (presets).

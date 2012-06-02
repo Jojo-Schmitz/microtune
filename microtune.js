@@ -5,7 +5,7 @@
 //  " M I C R O T U N E " plugin
 //
 //	Manages and applies micro-tonal tunings.
-//	Version 0.2 - Date 21.02.2011
+//	Version 0.3 - Date 02.06.2012
 //
 //	By Maurizio M. Gavioli, 2010.
 //
@@ -113,7 +113,7 @@ function applyValues()
 	curScore.startUndo();
 	for (staff = 0; staff < curScore.staves; ++staff)
 	{	cursor.staff = staff;
-		for (voice = 0; voice < 3; voice++)
+		for (voice = 0; voice < 4; voice++)
 		{	cursor.voice = voice;
 			cursor.rewind();					// set cursor to first chord/rest
 
