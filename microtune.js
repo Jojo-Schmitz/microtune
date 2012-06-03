@@ -5,7 +5,7 @@
 //  " M I C R O T U N E " plugin
 //
 //	Manages and applies micro-tonal tunings.
-//	Version 0.3 - Date 02.06.2012
+//	Version 0.4 - Date 03.06.2012
 //
 //	By Maurizio M. Gavioli, 2010.
 //
@@ -108,6 +108,10 @@ function applyValues()
 	idx = g_form.comboPresets.currentIndex;
 	preset = g_presets[idx];
 
+	// no score open (MuseScore 2.0+, can't happen earlier)
+	if (typeof curScore === 'undefined')
+		return
+	
 	// for each note of each chord of each part of each staff
 	cursor = new Cursor(curScore);
 	curScore.startUndo();
