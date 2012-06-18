@@ -11,11 +11,10 @@ it also allows to manage ready-made sets of tuning values (presets).
   
 Copyright: 'Microtune' has been made by Maurizio M. Gavioli, AKA [Miwarre]
     (http://musescore.org/en/user/2387), AKA [mgavioli]
-    (https://github.com/mgavioli),
-    fixes for a) voice 4 b) to check for a current Score being open have
-    been and c) the move to [GitHub] (https://github.com/Jojo-Schmitz/microtune)
-    provided by Joachim Schmitz, AKA [Jojo-Schmitz]
-    (http://musescore.org/en/user/4901).
+    (https://github.com/mgavioli), fixes for a) a playback bug, b) voice 4,
+    b) to check for a current Score being open and c) the move to [GitHub]
+    (https://github.com/Jojo-Schmitz/microtune) got added by Joachim Schmitz,
+    AKA [Jojo-Schmitz] (http://musescore.org/en/user/4901).
 
     Do with it whatever you like. The authors cannot be held responsible of
     ANYTHING in ANY way! You have been warned.

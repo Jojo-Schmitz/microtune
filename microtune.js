@@ -5,9 +5,10 @@
 //  " M I C R O T U N E " plugin
 //
 //	Manages and applies micro-tonal tunings.
-//	Version 0.4 - Date 03.06.2012
+//	Version 0.4 - Date 18.06.2012
 //
 //	By Maurizio M. Gavioli, 2010.
+//	By Joachim Schmitz, 2012.
 //
 //  MuseScore: Copyright (C)2008 Werner Schweer and others
 //
