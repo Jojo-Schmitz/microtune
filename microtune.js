@@ -129,6 +129,8 @@ function applyValues()
 						idx		= note.userAccidental;
 						if(idx >= 6 && idx <= 25)
 							note.tuning = preset[idx];
+						else
+							note.tuning = 0;
 					}
 				}
 				cursor.next();
