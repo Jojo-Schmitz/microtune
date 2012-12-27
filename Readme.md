@@ -2,7 +2,7 @@ M I C R O T U N E
 =================
 
 A plugin for MuseScore
-Version 0.4 - 18.06.2012
+Version 0.5 - 27.12.2012
   
 ---
 
