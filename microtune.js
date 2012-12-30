@@ -127,7 +127,7 @@ function applyValues()
 				{	for (chordnote = 0; chordnote < cursor.chord().notes; chordnote++)
 					{	note	= cursor.chord().note(chordnote);
 						idx		= note.userAccidental;
-						if(idx >= 6 && idx <= 25)
+						if(idx >= 6 && idx < 25)
 							note.tuning = preset[idx];
 						else
 							note.tuning = 0;
