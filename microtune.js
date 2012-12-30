@@ -28,9 +28,9 @@
 // Global vars
 
 // The g_presets array contains the data for each preset.
-//	Each item of this array is itself an array with 36 items:
-//		items [0] to [34] correspond to the 35 accidentals of MuseScore
-//			(accidents 0 - 6 are not currently used for micro-intervals, but reserved)
+//	Each item of this array is itself an array with 25 items:
+//		items [0] to [24] correspond to the 25 accidentals of MuseScore
+//			(accidents 0 - 5 are not currently used for micro-intervals, but reserved)
 //		item ["Name"] is a human-readable name of the preset.
 var	g_presets = [];
 var	g_numOfPresets	= 0;
