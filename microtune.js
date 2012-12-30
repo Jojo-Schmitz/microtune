@@ -5,7 +5,7 @@
 //  " M I C R O T U N E " plugin
 //
 //	Manages and applies micro-tonal tunings.
-//	Version 0.5 - Date 27.12.2012
+//	Version 0.6 - Date 30.12.2012
 //
 //	By Maurizio M. Gavioli, 2010.
 //	By Joachim Schmitz, 2012.
