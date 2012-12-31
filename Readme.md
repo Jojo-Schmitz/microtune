@@ -12,8 +12,8 @@ it also allows to manage ready-made sets of tuning values (presets).
 Copyright: 'Microtune' has been made by Maurizio M. Gavioli, AKA [Miwarre]
     (http://musescore.org/en/user/2387), AKA [mgavioli]
     (https://github.com/mgavioli), fixes for a) a playback bug, b) voice 4,
-    b) to check for a Score being open and c) the move to [GitHub]
-    (https://github.com/Jojo-Schmitz/microtune) got added by Joachim Schmitz,
+    b) to check for a Score being open, c) the move to [GitHub]
+    (https://github.com/Jojo-Schmitz/microtune), d) (re-)setting plain notes tuning to no tuning and e) a wrong tuning for Sori got added by Joachim Schmitz,
     AKA [Jojo-Schmitz] (http://musescore.org/en/user/4901).
 
     Do with it whatever you like. The authors cannot be held responsible of
@@ -105,6 +105,7 @@ Presets are sets of tuning values ready to be selected and applied.
 ## KNOWN LIMITATIONS
 
 'Microtune' requires at least MuseScore version 0.9.6 beta 2 in order to run.
+It ignores Sori and Koron (available since MuseScore 1.1).
 
 
 Any suggestion is welcome!
