@@ -2,7 +2,7 @@ M I C R O T U N E
 =================
 
 A plugin for MuseScore
-Version 0.6 - 30.12.2012
+Version 0.7 - 1.1.2013
   
 ---
 
@@ -13,7 +13,7 @@ Copyright: 'Microtune' has been made by Maurizio M. Gavioli, AKA [Miwarre]
     (http://musescore.org/en/user/2387), AKA [mgavioli]
     (https://github.com/mgavioli), fixes for a) a playback bug, b) voice 4,
     b) to check for a Score being open, c) the move to [GitHub]
-    (https://github.com/Jojo-Schmitz/microtune), d) (re-)setting plain notes tuning to no tuning and e) a wrong tuning for Sori got added by Joachim Schmitz,
+    (https://github.com/Jojo-Schmitz/microtune), d) (re-)setting plain notes tuning to no tuning and e) Sori and Koron got added by Joachim Schmitz,
     AKA [Jojo-Schmitz] (http://musescore.org/en/user/4901).
 
     Do with it whatever you like. The authors cannot be held responsible of
@@ -105,7 +105,6 @@ Presets are sets of tuning values ready to be selected and applied.
 ## KNOWN LIMITATIONS
 
 'Microtune' requires at least MuseScore version 0.9.6 beta 2 in order to run.
-It ignores Sori and Koron (available since MuseScore 1.1).
 
 
 Any suggestion is welcome!

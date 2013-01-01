@@ -5,10 +5,10 @@
 //  " M I C R O T U N E " plugin
 //
 //	Manages and applies micro-tonal tunings.
-//	Version 0.6 - Date 30.12.2012
+//	Version 0.7 - Date 1.1.2013
 //
 //	By Maurizio M. Gavioli, 2010.
-//	By Joachim Schmitz, 2012.
+//	By Joachim Schmitz, 2012, 2013.
 //
 //  MuseScore: Copyright (C)2008 Werner Schweer and others
 //
@@ -28,13 +28,14 @@
 // Global vars
 
 // The g_presets array contains the data for each preset.
-//	Each item of this array is itself an array with 25 items:
-//		items [0] to [24] correspond to the 25 accidentals of MuseScore
-//			(accidents 0 - 5 are not currently used for micro-intervals, but reserved)
+//	Each item of this array is itself an array with 27 items:
+//		items [0] to [26] correspond to the 27 accidentals of MuseScore
+//			(accidentals 0 - 5 are no micro-intervals
+//			 accidentals 25 and 26 are hardcoded to 50 resp. -50)
 //		item ["Name"] is a human-readable name of the preset.
 var	g_presets = [];
 var	g_numOfPresets	= 0;
-var	g_defaultPreset = [0, 0, 0, 0, 0, 0, -50, 0, -150, -50, 0, -150, 50, 0, 0, 150, -50, -150, 0, 50, -50, 0, 150, 50, 0];
+var	g_defaultPreset = [0, 0, 0, 0, 0, 0, -50, 0, -150, -50, 0, -150, 50, 0, 0, 150, -50, -150, 0, 50, -50, 0, 150, 50, 0, 50, -50];
 var	g_szDefaultPresetName	= "default";
 
 var	g_form;
@@ -68,13 +69,11 @@ function init()
 //-------------------------------------------------------------------
 
 function run()
-{	var		cursor, dir, file, loader;
-
-	// create the UI
-	loader	= new QUiLoader(null);
-	dir		= new QDir("" + pluginPath + "/res");
+{	// create the UI
+	var loader	= new QUiLoader(null);
+	var dir		= new QDir("" + pluginPath + "/res");
 	loader.setWorkingDirectory(dir);
-	file = new QFile(pluginPath + "/microtune.ui");
+	var file = new QFile(pluginPath + "/microtune.ui");
 	file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
 	g_form = loader.load(file, null);
 	g_form.comboPresets["currentIndexChanged(int)"].connect(setValuesFromPreset);
@@ -101,36 +100,29 @@ function run()
 //---------------------------------------------------------
 
 function applyValues()
-{	var		chordnote, note, staff, voice;
-	var		cursor;
-	var		idx;
-	var		preset;
-
-	idx = g_form.comboPresets.currentIndex;
-	preset = g_presets[idx];
+{	var idx = g_form.comboPresets.currentIndex;
+	var preset = g_presets[idx];
 
 	// no score open (MuseScore 2.0+, can't happen earlier)
 	if (typeof curScore === 'undefined')
 		return
 	
 	// for each note of each chord of each part of each staff
-	cursor = new Cursor(curScore);
+	var cursor = new Cursor(curScore);
 	curScore.startUndo();
-	for (staff = 0; staff < curScore.staves; ++staff)
+	for (var staff = 0; staff < curScore.staves; ++staff)
 	{	cursor.staff = staff;
-		for (voice = 0; voice < 4; voice++)
+		for (var voice = 0; voice < 4; voice++)
 		{	cursor.voice = voice;
 			cursor.rewind();					// set cursor to first chord/rest
 
 			while (!cursor.eos())
 			{	if (cursor.isChord())
-				{	for (chordnote = 0; chordnote < cursor.chord().notes; chordnote++)
-					{	note	= cursor.chord().note(chordnote);
+				{	for (var chordnote = 0; chordnote < cursor.chord().notes; chordnote++)
+					{	var note	= cursor.chord().note(chordnote);
 						idx		= note.userAccidental;
-						if(idx >= 6 && idx < 25)
+						if (idx < preset.length)
 							note.tuning = preset[idx];
-						else
-							note.tuning = 0;
 					}
 				}
 				cursor.next();
@@ -154,12 +146,9 @@ function dlgDone()
 //---------------------------------------------------------
 
 function updatePreset()
-{	var		preset;
-	var		step;
-
-	//get selected preset and pick the right item in g_presets array
-	preset = g_presets[g_form.comboPresets.currentIndex];
-	for(step=6; step < 25; step++)
+{	//get selected preset and pick the right item in g_presets array
+	var preset = g_presets[g_form.comboPresets.currentIndex];
+	for (var step=6; step < 25; step++)
 		preset[step] = parseInt( g_form["e"+step].text );
 	g_bDirty = true;
 }
@@ -171,19 +160,15 @@ function updatePreset()
 //---------------------------------------------------------
 
 function renamePreset()
-{	var		idx;
-	var		name;
-	var		preset;
-
-	//get selected preset and pick the right item in g_presets array
-	idx = g_form.comboPresets.currentIndex;
-	preset = g_presets[idx];
-	// aks the user for a new name of the preset
-	name = QInputDialog.getText(g_form, "New preset name",
+{	//get selected preset and pick the right item in g_presets array
+	var idx = g_form.comboPresets.currentIndex;
+	var preset = g_presets[idx];
+	// ask the user for a new name of the preset
+	var name = QInputDialog.getText(g_form, "New preset name",
 			"Enter a new name for the preset:", QLineEdit.Normal,
 			preset["Name"], 0);
 	// if returned string is not empty, update preset name
-	if(name != null)
+	if (name != null)
 	{	preset["Name"] = name;			// update name in internal data
 		g_form.comboPresets.setItemText(idx, preset["Name"]);
 		g_bDirty = true;
@@ -201,17 +186,19 @@ function addPreset()
 	var		preset = [];
 
 	// init the new preset to the values currently in the dlg
-	for(idx=0; idx < 6; idx++)
+	for (idx=0; idx < 6; idx++) // none, #, b, ## and bb
 		preset[idx] = 0;
-	for(idx=6; idx < 25; idx++)
+	for (idx=6; idx < 25; idx++)
 		preset[idx] = parseInt(g_form["e"+idx].text);
+	preset[25] =  50; // Sori
+	preset[26] = -50; // Koron
 
-	// aks the user for a name of the new preset
+	// ask the user for a name of the new preset
 	preset["Name"] = QInputDialog.getText(g_form, "New preset",
 			"Enter a name for the new preset:", QLineEdit.Normal,
 			"[new preset]", 0);
 	// if returned string is not empty, add the new preset
-	if(preset["Name"] != null)
+	if (preset["Name"] != null)
 	{	g_presets[g_numOfPresets] = preset;			// add to internal data
 		g_numOfPresets++;
 		g_form.comboPresets.addItem(preset["Name"]);// add to combo box
@@ -228,13 +215,10 @@ function addPreset()
 //---------------------------------------------------------
 
 function deletePreset()
-{	var		idx;
-	var		preset;
-
-	//get selected temperament and ask the user for a confirmation
-	idx = g_form.comboPresets.currentIndex;
+{	// get selected temperament and ask the user for a confirmation
+	var idx = g_form.comboPresets.currentIndex;
 	// using custom buttons to show "Yes" / "No" does not seem to work!
-	if(QMessageBox.question(g_form, "Delete preset",
+	if (QMessageBox.question(g_form, "Delete preset",
 			"\"" + g_presets[idx]["Name"] +
 			"\" will be deleted permanently\nProceed? (press ESC to abort)") != QMessageBox.Ok)
 		return;
@@ -242,7 +226,7 @@ function deletePreset()
 	// remove item from combo box
 	g_form.comboPresets.removeItem(idx);
 	// remove item from internal data, shifting all 'next' presets 'down' one slot
-	for(preset = idx; preset < g_numOfPresets-1; preset++)
+	for (var preset = idx; preset < g_numOfPresets-1; preset++)
 		g_presets[preset] = g_presets[preset+1];
 	g_presets.pop();					// remove last temperament
 	g_numOfPresets--;
@@ -256,17 +240,15 @@ function deletePreset()
 //---------------------------------------------------------
 
 function exportPresets()
-{	var		idx;
-
-	// open a file selection dlg
+{	// open a file selection dlg
 	var fName = QFileDialog.getSaveFileName(g_form, "Select a data file to create",
 			g_szExportPath, "DAT file (*.dat)", 0);
-	if(fName == null)
+	if (fName == null)
 		return;
 	saveIni(fName, false);				// save data, but not the preferences
 	// store last export path
-	idx = fName.lastIndexOf("/");
-	if(idx != -1)
+	var idx = fName.lastIndexOf("/");
+	if (idx != -1)
 		g_szExportPath = fName.substring(0, idx);
 	g_bDirty = true;
 }
@@ -276,12 +258,12 @@ function importPresets()
 	// open a file selection dlg
 	var fName = QFileDialog.getOpenFileName(g_form, "Select data file to import",
 			g_szImportPath, "DAT file (*.dat)", 0);
-	if(fName == null)
+	if (fName == null)
 		return;
 	loadIni(fName, false);				// load data, but not the preferences
 	// store last import path
 	idx = fName.lastIndexOf("/");
-	if(idx != -1)
+	if (idx != -1)
 		g_szImportPath = fName.substring(0, idx);
 	g_bDirty = true;
 }
@@ -292,12 +274,10 @@ function importPresets()
 //---------------------------------------------------------
 
 function setValuesFromPreset(nIdx)
-{	var		preset, step;
-
-	preset = g_presets[nIdx];
+{	var preset = g_presets[nIdx];
 
 	// set each value of the preset
-	for(step = 6; step < 25; step++)
+	for (var step = 6; step < 25; step++)
 		g_form["e"+step].setText("" + preset[step]);
 	g_bDirty = true;
 }
@@ -309,18 +289,16 @@ function setValuesFromPreset(nIdx)
 //---------------------------------------------------------
 
 function presetExists(preset)
-{	var		nIdx, bSame, nStep;
-
-	bExists = false;
-	for(nIdx=0; nIdx < g_numOfPresets; nIdx++)
-	{	bSame = true;
-		for(nStep=0; nStep < 25; nStep++)
-		{	if(preset[nStep] != g_presets[nIdx][nStep])
+{	bExists = false;
+	for (var nIdx=0; nIdx < g_numOfPresets; nIdx++)
+	{	var bSame = true;
+		for (var nStep=0; nStep < 27; nStep++)
+		{	if (preset[nStep] != g_presets[nIdx][nStep])
 			{	bSame = false;			// at least this item is different
 				break;
 			}
 		}
-		if(bSame)						// if complete match
+		if (bSame)						// if complete match
 			return true;				// return preset exists
 	}
 	return false;
@@ -347,7 +325,7 @@ function loadIni(fName, bPrefs)
 {	var		currPreset, idx, idx2, numOfPresets, preset, settings, step;
 
 	// if preferences, look in AppData and load config entries
-	if(bPrefs)
+	if (bPrefs)
 	{	settings = new QSettings(QSettings.IniFormat, QSettings.UserScope,
 				g_szOrgName, g_szAppName, null);
 		currPreset = settings.value(g_szCurrPresetKey, 0);
@@ -359,13 +337,18 @@ function loadIni(fName, bPrefs)
 
 	// presets: get number of presets and each preset in turn
 	numOfPresets = parseInt(settings.value(g_szNumOfPresetsKey, 0));
-	for(idx=idx2=0; idx < numOfPresets; idx++)
+	for (idx=idx2=0; idx < numOfPresets; idx++)
 	{	preset = new Array();
 		preset = settings.value(g_szPresetKey+idx, g_defaultPreset);
+		if ( preset.length < 26 ) // old preset
+		{
+			preset[25] =  50 // Sori
+			preset[26] = -50 // Koron
+		}
 		preset["Name"] = settings.value(g_szPresetNameKey+idx, g_szDefaultPresetName);
 		// on import, check the preset does not already exists
-		if(!bPrefs && presetExists(preset) )
-		{	if(QMessageBox.question(g_form, "Preset exists",
+		if (!bPrefs && presetExists(preset) )
+		{	if (QMessageBox.question(g_form, "Preset exists",
 			"Import preset \"" + preset["Name"] +
 			"\" is the same as existing preset \"" + g_presets[idx]["Name"] +
 			"\"\nSkip it? (press ESC to import it anyway)") == QMessageBox.Ok)
@@ -378,14 +361,14 @@ function loadIni(fName, bPrefs)
 	}
 	numOfPresets = idx2;
 
-	if(bPrefs)
+	if (bPrefs)
 	{	g_bDirty = false;
 		g_numOfPresets = numOfPresets;
 		// if no preset, create a default one
-		if(g_numOfPresets < 1)
+		if (g_numOfPresets < 1)
 		{	g_numOfPresets = 0;
 			preset = [];
-			for(step = 0; step < 25; step++)
+			for (step = 0; step < g_defaultPreset.length; step++)
 				preset[step] = g_defaultPreset[step];
 			preset["Name"] = g_szDefaultPresetName;
 			g_presets[0] = preset;			// add to internal data
@@ -415,11 +398,11 @@ function loadIni(fName, bPrefs)
 //---------------------------------------------------------
 
 function saveIni(fName, bPrefs)
-{	var		preset, settings, step;
+{	var		settings;
 
 	// if preferences, look in AppData and store config entries
-	if(bPrefs)
-	{	if(!g_bDirty)					// if settings are not dirty, do nothing
+	if (bPrefs)
+	{	if (!g_bDirty)					// if settings are not dirty, do nothing
 			return;
 		settings = new QSettings(QSettings.IniFormat, QSettings.UserScope,
 				g_szOrgName, g_szAppName, null);
@@ -434,7 +417,7 @@ function saveIni(fName, bPrefs)
 	settings.remove(g_szPresetsSect);
 	settings.setValue(g_szNumOfPresetsKey, g_numOfPresets);
 	// save each preset
-	for(preset=0; preset < g_numOfPresets; preset++)
+	for (var preset=0; preset < g_numOfPresets; preset++)
 	{	settings.setValue(g_szPresetKey+preset, g_presets[preset]);
 		settings.setValue(g_szPresetNameKey+preset, g_presets[preset]["Name"]);
 	}
