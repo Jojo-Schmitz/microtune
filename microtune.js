@@ -28,11 +28,11 @@
 // Global vars
 
 // The g_presets array contains the data for each preset.
-//	Each item of this array is itself an array with 27 items:
-//		items [0] to [26] correspond to the 27 accidentals of MuseScore
-//			(accidentals 0 - 5 are no micro-intervals
-//			 accidentals 25 and 26 are hardcoded to 50 resp. -50)
-//		item ["Name"] is a human-readable name of the preset.
+// Each item of this array is itself an array with 27 items:
+//  items [0] to [26] correspond to the 27 accidentals of MuseScore
+//   (accidentals 0 - 5 are no micro-intervals (none, #, b, ##, bb and natural),
+//    accidentals 25 (Sori) and 26 (Koron) are hardcoded to 50 resp. -50)
+//  item ["Name"] is a human-readable name of the preset.
 var	g_presets = [];
 var	g_numOfPresets	= 0;
 var	g_defaultPreset = [0, 0, 0, 0, 0, 0, -50, 0, -150, -50, 0, -150, 50, 0, 0, 150, -50, -150, 0, 50, -50, 0, 150, 50, 0, 50, -50];
@@ -186,7 +186,7 @@ function addPreset()
 	var		preset = [];
 
 	// init the new preset to the values currently in the dlg
-	for (idx=0; idx < 6; idx++) // none, #, b, ## and bb
+	for (idx=0; idx < 6; idx++) // none, #, b, ##, bb and natural
 		preset[idx] = 0;
 	for (idx=6; idx < 25; idx++)
 		preset[idx] = parseInt(g_form["e"+idx].text);
