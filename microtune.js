@@ -5,7 +5,7 @@
 //  " M I C R O T U N E " plugin
 //
 //	Manages and applies micro-tonal tunings.
-//	Version 0.7 - Date 1.1.2013
+//	Version 0.8 - Date 2Jan2013
 //
 //	By Maurizio M. Gavioli, 2010.
 //	By Joachim Schmitz, 2012, 2013.
@@ -96,27 +96,41 @@ function run()
 //---------------------------------------------------------
 //	applyValues()
 //	called when user presses the "Apply" button
-//	applies the values currently in the dlg to the score.
+//	applies the values currently in the dlg to the score
+//	or the selection
 //---------------------------------------------------------
 
 function applyValues()
-{	var idx = g_form.comboPresets.currentIndex;
-	var preset = g_presets[idx];
-
-	// no score open (MuseScore 2.0+, can't happen earlier)
+{	// no score open (MuseScore 2.0+, can't happen earlier)
 	if (typeof curScore === 'undefined')
 		return
 	
+	var idx = g_form.comboPresets.currentIndex;
+	var preset = g_presets[idx];
+
 	// for each note of each chord of each part of each staff
 	var cursor = new Cursor(curScore);
-	curScore.startUndo();
-	for (var staff = 0; staff < curScore.staves; ++staff)
-	{	cursor.staff = staff;
-		for (var voice = 0; voice < 4; voice++)
-		{	cursor.voice = voice;
-			cursor.rewind();					// set cursor to first chord/rest
+	cursor.goToSelectionStart();
+	var startStaff = cursor.staff;
+	cursor.goToSelectionEnd();
+	var endStaff   = cursor.staff;
+	var endTick    = cursor.tick(); // if no selection, go to end of score
 
-			while (!cursor.eos())
+	if (cursor.eos()) // if no selection
+	{	startStaff = 0; // start with 1st staff
+		endStaff = curScore.staves; // and end with last
+	}
+
+	curScore.startUndo();
+	for (var staff = startStaff; staff < endStaff; ++staff)
+	{	for (var voice = 0; voice < 4; voice++)
+		{	cursor.goToSelectionStart();
+			cursor.staff = staff;
+			cursor.voice = voice;
+			// if no selection, start at beginning of score
+			if (cursor.eos())
+				cursor.rewind();
+			while (cursor.tick() < endTick)
 			{	if (cursor.isChord())
 				{	for (var chordnote = 0; chordnote < cursor.chord().notes; chordnote++)
 					{	var note	= cursor.chord().note(chordnote);

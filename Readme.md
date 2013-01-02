@@ -2,7 +2,7 @@ M I C R O T U N E
 =================
 
 A plugin for MuseScore
-Version 0.7 - 1.1.2013
+Version 0.8 - 1Jan2013
   
 ---
 
@@ -12,8 +12,10 @@ it also allows to manage ready-made sets of tuning values (presets).
 Copyright: 'Microtune' has been made by Maurizio M. Gavioli, AKA [Miwarre]
     (http://musescore.org/en/user/2387), AKA [mgavioli]
     (https://github.com/mgavioli), fixes for a) a playback bug, b) voice 4,
-    b) to check for a Score being open, c) the move to [GitHub]
-    (https://github.com/Jojo-Schmitz/microtune), d) (re-)setting plain notes tuning to no tuning and e) Sori and Koron got added by Joachim Schmitz,
+    c) to check for a Score being open, d) the move to [GitHub]
+    (https://github.com/Jojo-Schmitz/microtune), 
+    e) (re-)setting plain notes tuning to no tuning, f) Sori and Koron
+    g) optionally work on a slection only got added by Joachim Schmitz,
     AKA [Jojo-Schmitz] (http://musescore.org/en/user/4901).
 
     Do with it whatever you like. The authors cannot be held responsible of
@@ -36,11 +38,13 @@ following folder:
 
 ## APPLYING THE TUNING
 
-1. Select the "Microtune" plugin from the "Plugins" menu list.
+1.  Optionally select measures to work on, withoug selection the entire score
+    will be affected.
+2.  Select the "Microtune" plugin from the "Plugins" menu list.
     A dialogue box will be shown with the current set of tuning values.
-2.  Select the needed preset from the "Presets" drop list or insert the required
+3.  Select the needed preset from the "Presets" drop list or insert the required
     value for each accidental you want to tune.
-3.  Press the "Apply" button.
+4.  Press the "Apply" button.
 
 
 ### THE TUNING VALUES
