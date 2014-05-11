@@ -2,7 +2,7 @@ M I C R O T U N E
 =================
 
 A plugin for MuseScore,
-Version 0.8 - 1Jan2013
+Version 0.9 - 11May2014
   
 ---
 
@@ -14,8 +14,10 @@ Copyright: 'Microtune' has been made by Maurizio M. Gavioli, AKA [Miwarre]
     (https://github.com/mgavioli), fixes for a) a playback bug, b) voice 4,
     c) to check for a Score being open, d) the move to [GitHub]
     (https://github.com/Jojo-Schmitz/microtune), 
-    e) (re-)setting plain notes tuning to no tuning, f) Sori and Koron
-    and g) optionally work on a selection only got added by Joachim Schmitz,
+    e) (re-)setting plain notes tuning to no tuning, f) Sori and Koron,
+    g) optionally work on a selection only and h) avoid conflict with other
+    plugins that modify the tuning of notes, like [Scales]
+    (https://github.com/lasconic/temperament), got added by Joachim Schmitz,
     AKA [Jojo-Schmitz] (http://musescore.org/en/user/4901).
 
     Do with it whatever you like. The authors cannot be held responsible of
