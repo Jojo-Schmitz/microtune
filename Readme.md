@@ -2,7 +2,7 @@ M I C R O T U N E
 =================
 
 A plugin for MuseScore,
-Version 0.9 - 11May2014
+Version 1.0 - 14Aug2014
   
 ---
 
@@ -110,7 +110,10 @@ Presets are sets of tuning values ready to be selected and applied.
 
 ## KNOWN LIMITATIONS
 
-'Microtune' requires at least MuseScore version 0.9.6 beta 2 in order to run.
+'Microtune' has been tested to work with MuseScore version 0.9.6 beta 2. It may
+run with 0.9.6 Beta 1 too and should work with all later versions, up to 1.3.
+It only works on accidentals directly attached to notes, not on key signatures,
+this is restriction of the underlying plugin framwork.
 
 
 Any suggestion is welcome!

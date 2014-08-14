@@ -5,7 +5,7 @@
 //  " M I C R O T U N E " plugin
 //
 //	Manages and applies micro-tonal tunings.
-//	Version 0.9 - Date 11May2014
+//	Version 1.0 - Date 14Aug2014
 //
 //	By Maurizio M. Gavioli, 2010.
 //	By Joachim Schmitz, 2012-2014.
@@ -86,6 +86,8 @@ function run()
 	g_form.pushOk.clicked.connect(applyValues);
 	g_form.pushCancel.clicked.connect(dlgDone);
 
+	g_form.addTo.toggled.connect(toggleAdd);
+
 	// load configuration and update dlg controls
 	loadIni(null, true);
 	setValuesFromPreset(g_form.comboPresets.currentIndex);
@@ -136,7 +138,10 @@ function applyValues()
 					{	var note	= cursor.chord().note(chordnote);
 						idx		= note.userAccidental;
 						if (idx < preset.length)
-							note.tuning += preset[idx];
+							if (g_Form.addTo.checked)
+								note.tuning += preset[idx];
+							else
+								note.tuning = preset[idx];
 					}
 				}
 				cursor.next();
@@ -146,6 +151,10 @@ function applyValues()
 	curScore.endUndo();
 	saveIni(null, true);				// save data
 	g_form.accept();
+}
+
+function toggleAdd(checked)
+{	g_form.addTo.checked = checked;
 }
 
 function dlgDone()
